@@ -1,0 +1,82 @@
+.donation-type-selector {
+    /* box-sizing: border-box; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0 30px 0 !important;
+}
+.donation-type-selector .donation-type {
+    flex: 1 1 50%;
+    /* background-color: gray; */
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #515151;
+    background: #fff;
+    background-image: -webkit-linear-gradient(top,#fff 0,#f9f9f9 100%);
+    background-image: -o-linear-gradient(top,#fff 0,#f9f9f9 100%);
+    background-image: linear-gradient(to bottom,#fff 0,#f9f9f9 100%);
+    background-repeat: repeat-x;
+    display: block;
+    width: 100%;
+    padding: 0;
+    line-height: 18px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.25);
+    border: 0;
+    margin: 0;
+    outline: 0;
+    text-align: center;
+    height: 50px;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+.donation-type-selector .donation-type .button-gradient {
+    opacity: 0;
+    -webkit-transition: opacity 50ms ease-in-out;
+    -o-transition: opacity 50ms ease-in-out;
+    transition: opacity 50ms ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.donation-type-selector .donation-type.selected .button-gradient {
+    opacity: 1;
+    background: #5087d9;
+    background-image: -webkit-linear-gradient(top,#5087d9 0,#4579c7 100%);
+    background-image: -o-linear-gradient(top,#5087d9 0,#4579c7 100%);
+    background-image: linear-gradient(to bottom,#5087d9 0,#4579c7 100%);
+    background-repeat: repeat-x;
+}
+.donation-type-selector .donation-type .button-text {
+    position: relative;
+    z-index: 2;
+}
+.donation-type-selector .donation-type.selected .button-text {
+    color: #fff;
+}
+.choose-amount .give-donation-levels-wrap .give-donation-level-btn {
+    padding: 14px;
+}
+.choose-amount .give-donation-levels-wrap .give-donation-level-btn.give-btn-level-custom {
+    padding: 4px;
+}
+[id*=give-form] .give-recurring-donors-choice {
+    display: none;
+}
+.choose-amount .give-donation-levels-wrap {
+    order: 5;
+}
+
+.choose-amount .give-total-wrap {
+    order: 10;
+}
+form[id*=give-form] .give-donation-amount {
+    padding: 10px 20px;
+    margin-top: 30px !important;
+}
+.advance-btn, .download-btn, .give-submit {
+    margin-top: 15px;
+}
