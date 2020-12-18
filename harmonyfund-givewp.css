@@ -635,9 +635,16 @@
     margin-top: 15px;
     box-shadow: 0 1px 5px 1px rgb(0 0 0 / 36%);
     box-shadow: 0 1px 5px 1px rgb(0 0 0 / 36%);
+    width: auto;
 }
 
-.give-viewing-form-in-iframe .hf-advance-btn-wrapper .advance-btn {
+.give-viewing-form-in-iframe .advance-btn,
+.give-viewing-form-in-iframe .download-btn {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.give-viewing-form-in-iframe .hf-advance-btn-wrapper #give-purchase-button {
     width: 100%;
 }
 
@@ -1105,8 +1112,8 @@ input[type=checkbox].heart-checkbox+label:after {
         margin: 0 20px !important;
     }
     .give-viewing-form-in-iframe .hf-advance-btn-wrapper {
-        margin-left: 20px !important;
-        margin-right: 20px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
 }
 

@@ -18,15 +18,16 @@ class HarmonyFundGiveWPDonations {
       add_action( 'init', array($this, 'hf_enqueue_scripts'), 100);
       add_action( 'give_embed_head', array($this, 'hf_enqueue_scripts'), 100);
       add_filter( 'give_form_content_output', array($this, 'hf_give_form_content_output'), 10, 3);
-      add_action( 'give_before_donation_levels', array($this, 'hf_add_elements_to_givewp_form'), 10, 2); 
+      add_action( 'give_before_donation_levels', array($this, 'hf_add_elements_to_givewp_form_amount_section'), 10, 2); 
+      add_action( 'give_donation_form_after_personal_info', array($this, 'hf_add_elements_to_givewp_form_payment_section'), 10, 1); 
     } // end function construct
 
     /**
      * Add the JS and CSS scripts necessary for the forms
      */
     public function hf_enqueue_scripts() {
-      wp_enqueue_style( 'hf-givewp', get_stylesheet_directory_uri() . '/harmonyfund-givewp.css', '', '1.5.1');
-      wp_enqueue_script( 'hf-givewp', get_stylesheet_directory_uri() . '/harmonyfund-givewp.js', array( 'jquery' ), '1.0' , true);
+      wp_enqueue_style( 'hf-givewp', get_stylesheet_directory_uri() . '/harmonyfund-givewp.css', '', '1.5.1a');
+      wp_enqueue_script( 'hf-givewp', get_stylesheet_directory_uri() . '/harmonyfund-givewp.js', array( 'jquery' ), '1.5.1' , true);
     }
 
     /**
@@ -51,9 +52,9 @@ class HarmonyFundGiveWPDonations {
     } // end function
 
     /**
-     * Adds the various HTML elements to the GiveWP forms
+     * Adds the various HTML elements to the GiveWP forms on the amount tab
      */
-    public function hf_add_elements_to_givewp_form($output, $form) {
+    public function hf_add_elements_to_givewp_form_amount_section($output, $form) {
       // Get the GiveWP color settings
       $templateOptions = FormTemplateUtils::getOptions();
       $primary_color        = ! empty( $templateOptions['introduction']['primary_color'] ) ? $templateOptions['introduction']['primary_color'] : '#28C77B';
@@ -106,6 +107,19 @@ class HarmonyFundGiveWPDonations {
         <p class="one-time">You are making a one-time donation.</p>
         <p class="recurring" style="display:none;">You are making this donation each <span class="hf-recurring-period">month</span>.</p>
       </div>
+      
+      <?php
+    } // end function
+    /**
+     * Adds the various HTML elements to the GiveWP forms on the payment tab
+     */
+    public function hf_add_elements_to_givewp_form_payment_section($form) {
+      // Get the GiveWP color settings
+      // $templateOptions = FormTemplateUtils::getOptions();
+      // $primary_color        = ! empty( $templateOptions['introduction']['primary_color'] ) ? $templateOptions['introduction']['primary_color'] : '#28C77B';
+      // $lighter_color = $this->hf_adjust_brightness($primary_color, 25);
+        ?>
+
       <div class="hf-popup hf-modal">
         <div class="hf-modal-box">
           <div class="hf-close"><i class="fa fa-times" aria-hidden="true"></i></div><!--hf-close-->
@@ -125,9 +139,9 @@ class HarmonyFundGiveWPDonations {
         </div><!--hf-modal-box-->
         <div class="hf-modal-background"></div><!--hf-modal-background-->
       </div><!-- hf-modal -->
-      <?php
-    } // end function
 
+    <?php
+    }
     /**
      * Computes new hex color values given a starting value and then the 
      * increase or decrease in steps.

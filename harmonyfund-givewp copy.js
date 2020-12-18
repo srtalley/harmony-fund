@@ -1,4 +1,4 @@
-//version: 1.5.1
+//version: 1.5
 
 // You can modify these variables to change what happens when someone 
 // leaves the donation amount set to "One Time." 
@@ -67,17 +67,16 @@ jQuery(function($) {
 
         // Add a wrapper around the donation button so we can catch events
         // and show a message if the person hasn't chosen to donate enough
-        // $('.give-section.choose-amount .give-btn.advance-btn').wrap('<div class="hf-advance-btn-wrapper"></div>');
-        $('.give-section.payment .give-submit-button-wrap').wrap('<div class="hf-advance-btn-wrapper"></div>');
+        $('.give-section.choose-amount .give-btn.advance-btn').wrap('<div class="hf-advance-btn-wrapper"></div>');
+
         // Handle what happens when someone tries to click the donation button
         $('.hf-advance-btn-wrapper').on('click', function(e) {
             if (e.target != this) {
                 return;
             }
-            var recurring_period_checkbox = $(this).parentsUntil('.give-form').parent().find('.give-recurring-donors-choice .give-recurring-period');
-
+            var recurring_period_checkbox = $(this).parent().find('.give-recurring-donors-choice .give-recurring-period');
             if (!$(recurring_period_checkbox).prop('checked')) {
-                var current_give_amount = $(this).parentsUntil('.give-form').parent().find('#give-amount').val();
+                var current_give_amount = $(this).parent().find('#give-amount').val();
                 // Get the amount in the field
                 var currency_code = $(this).parentsUntil('.give-form').parent().attr('data-currency_code');
                 if (currency_code == 'EUR') {
@@ -102,7 +101,7 @@ jQuery(function($) {
         // Handle the click when someone wants to keep their original donation amount
         $('.hf-donate-keep-onetime').on('click', function(e) {
             e.preventDefault();
-            $(this).parentsUntil('.give-form').parent().find('#give-purchase-button').click();
+            $(this).parentsUntil('.give-section.choose-amount').parent().find('.give-btn.advance-btn').click();
         });
 
         // Handle the click when someone wants to do recurring donation instead
@@ -110,7 +109,7 @@ jQuery(function($) {
 
             var donate_modify_target = e.target;
             e.preventDefault();
-            var current_section = $(donate_modify_target).parentsUntil('.give-form').parent();
+            var current_section = $(donate_modify_target).parentsUntil('.give-section.choose-amount').parent();
 
             // get the new recurring amount
             var recurring_amount = $(current_section).find('.hf-modal').data('recurring-amount');
@@ -125,7 +124,7 @@ jQuery(function($) {
 
             setTimeout(function() {
                 // click the donation button and continue to payment 
-                $(current_section).find('#give-purchase-button').click();
+                $(current_section).find('.give-btn.advance-btn').click();
             }, 750);
 
         });
@@ -144,7 +143,8 @@ jQuery(function($) {
 
         // get the form currency symbol
         var currency_symbol = $(current_element).parentsUntil('.give-form').parent().attr('data-currency_symbol');
-        var element_lightbox = $(current_element).parentsUntil('.give-form').parent().find('.hf-modal');
+        console.log(currency_symbol);
+        var element_lightbox = $(current_element).parent().find('.hf-modal');
 
         $(element_lightbox).find('.hf-donate-original-amount').text(currency_symbol + original_amount);
         $(element_lightbox).find('.hf-donate-new-amount').text(currency_symbol + new_amount);
